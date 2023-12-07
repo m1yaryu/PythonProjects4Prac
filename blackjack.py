@@ -1,32 +1,41 @@
 import random
 
 #list of cards
-Cards = {"A♠, 2♠, 3♠, 4♠, 5♠, 6♠, 7♠, 8♠, 9♠, 10♠, J♠, Q♠, K♠, A♥, 2♥, 3♥, 4♥, 5♥, 6♥, 7♥, 8♥, 9♥, 10♥, J♥, Q♥, K♥, A♣, 2♣, 3♣, 4♣, 5♣, 6♣, 7♣, 8♣, 9♣, 10♣, J♣, Q♣, K♣, A♦, 2♦, 3♦, 4♦, 5♦, 6♦, 7♦, 8♦, 9♦, 10♦, J♦, Q♦, K♦"}
+Cards = ["A♠", "2♠", "3♠", "4♠", "5♠", "6♠", "7♠", "8♠", "9♠", "10♠", "J♠", "Q♠", "K♠",
+         "A♥", "2♥", "3♥", "4♥", "5♥", "6♥", "7♥", "8♥", "9♥", "10♥", "J♥", "Q♥", "K♥", 
+         "A♣", "2♣", "3♣", "4♣", "5♣", "6♣", "7♣", "8♣", "9♣", "10♣", "J♣", "Q♣", "K♣", 
+         "A♦", "2♦", "3♦", "4♦", "5♦", "6♦", "7♦", "8♦", "9♦", "10♦", "J♦", "Q♦", "K♦"]
 
+#initializing dealer and player cards variables 
 dealer_cards = ""
 player_cards = ""
+player_cards1 = ""
 
-for i in range(2):
-    dealer_cards += random.choices(Cards)
-    player_cards += random.choices(Cards)
+#game flow 
+def gameMain():
+    valueCalc()
+    playerMove()
 
-print(dealer_cards)
-print(player_cards)
-#code for the actual game
-#def game_main():
-#    while True:
-#        print("Dealer: ")
-#        print("You: ")
-#
+#performs program based on player's input/move
+def playerMove():
+    move = input("What's the move?(Hit/Stand/Double) --> ")
+    if move == stand:
+        stand()
+    
+    elif move == hit:
+        player_cards += random.choice(Cards)
+    
+    elif move == double:
+        player_cards1 = player_cards + random.choice(Cards)
 
-#starting code
-#def game_start():
-#    gameStart = input("Start?")
-#    if gameStart == True:
-#        return gameStart
-#    else:
- #       return 0
+def valueCalc():
+#    if dealer_cards == 
+#        print(f"dealer: {}")
+    
 
-#game_start()
-#if gameStart == True:
-#    game_main()
+
+
+    
+
+
+    
