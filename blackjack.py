@@ -9,15 +9,19 @@ Cards = ["A♠", "2♠", "3♠", "4♠", "5♠", "6♠", "7♠", "8♠", "9♠",
 #initializing dealer and player cards variables 
 player_cards = []
 dealer_cards = []
-start_game = input("Start game?[Y/N] -> ")
+dealer_cards1 = []
+##start_game = input("Start game?[Y/N] -> ")
 
 #game flow 
 def gameMain():
     while start_game == True:
-        player_cards.extend(random.sample(Cards, 2))
-        dealer_cards.extend(Cards, 2)
+        player_cards.append(random.sample(Cards, 2))
+        dealer_cards.append(random.choice(Cards))
+        dealer_cards1.append(random.choice(Cards))
         valueCalc()
+        print(player_cards)
         playerMove()
+
 
 #performs program based on player's input/move
 def playerMove():
@@ -30,6 +34,16 @@ def playerMove():
             player_cards += random.choice(Cards)
     
 
-#def valueCalc():
-#    if dealer_cards == 
-#        print(f"dealer: {}")
+##def valueCalc():
+##    if dealer_cards == 
+##        print(f"dealer: {}")
+
+player_cards.append(random.sample(Cards, 2))
+dealer_cards.append(random.choice(Cards))
+dealer_cards1.append(random.choice(Cards))
+
+
+
+
+print(f"dealer's hand: {' '.join(dealer_cards)} + x")
+print(f"your hand: {' '.join(player_cards[0])}")
