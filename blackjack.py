@@ -7,10 +7,7 @@ Cards = ["A♠", "2♠", "3♠", "4♠", "5♠", "6♠", "7♠", "8♠", "9♠",
          "A♣", "2♣", "3♣", "4♣", "5♣", "6♣", "7♣", "8♣", "9♣", "10♣", "J♣", "Q♣", "K♣", 
          "A♦", "2♦", "3♦", "4♦", "5♦", "6♦", "7♦", "8♦", "9♦", "10♦", "J♦", "Q♦", "K♦"]
 
-#initializing dealer and player cards variables 
-player_cards = []
-dealer_cards = []
-dealer_cards1 = []
+#User input to start the game
 start_game = input("Start game?[Y/N] -> ")
 
 #game flow 
