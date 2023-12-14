@@ -13,12 +13,15 @@ start_game = input("Start game?[Y/N] -> ")
 #game flow 
 def gameMain():
     while start_game == True:
+        #Shuffle and dealing of cards
         player_cards = random.sample(Cards, 2)
         dealer_cards = random.choice(Cards)
         dealer_cards1 = random.choice(Cards)
+        #Initializing each value
         playerVal = 0
         dealerVal = 0
         dealerVal1 = 0  
+        #Calculating the value of player's hand
         for Card in player_cards:
             player_card_value = Card[0]
             if player_card_value == "1" or player_card_value == "J" or player_card_value == "Q" or player_card_value == "K":
@@ -29,6 +32,7 @@ def gameMain():
             elif player_card_value == "A":
                 playerVal += 11
 
+        #Calculating dealer's hand
         dealer_card_value = dealer_cards[0]
         if dealer_card_value == "1" or dealer_card_value == "J" or dealer_card_value == "Q" or dealer_card_value == "K":
                 dealerVal += 10
@@ -47,7 +51,7 @@ def gameMain():
         elif dealer_card1_value == "A":
                 dealerVal1 += 11
 
-
+        #Output each hand and it's value
         print(f"dealer's hand: {' '.join(dealer_cards[0])} x")
         print(f"your hand: {' '.join(player_cards[0])}")
         playerMove()
