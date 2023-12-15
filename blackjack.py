@@ -32,7 +32,7 @@ def gameMain():
             elif player_card_value == "A":
                 playerVal += 11
 
-        #Calculating dealer's hand
+        #Calculating dealer's hand(revealed card)
         dealer_card_value = dealer_cards[0]
         if dealer_card_value == "1" or dealer_card_value == "J" or dealer_card_value == "Q" or dealer_card_value == "K":
                 dealerVal += 10
@@ -42,6 +42,7 @@ def gameMain():
         elif dealer_card_value == "A":
                 dealerVal += 11
 
+        #Calculating dealer's hand(hidden card)
         dealer_card1_value = dealer_cards1[0]
         if dealer_card1_value == "1" or dealer_card1_value == "J" or dealer_card1_value == "Q" or dealer_card1_value == "K":
                 dealerVal1 += 10
@@ -50,10 +51,12 @@ def gameMain():
                 dealerVal1 += dealer_card1_value
         elif dealer_card1_value == "A":
                 dealerVal1 += 11
+        
+        dealer_hand_value = dealerVal + dealerVal1
 
         #Output each hand and it's value
-        print(f"dealer's hand: {' '.join(dealer_cards[0])} x")
-        print(f"your hand: {' '.join(player_cards[0])}")
+        print(f"dealer's hand: {''.join(dealer_cards)} x ({dealerVal})")
+        print(f"your hand: {' '.join(player_cards)} ({playerVal})")
         playerMove()
 
 
@@ -66,5 +69,3 @@ def playerMove():
     
         elif move == "hit":
             player_cards += random.choice(Cards)
-    
-
