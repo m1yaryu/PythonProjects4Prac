@@ -62,10 +62,11 @@ def gameMain():
 
 #performs program based on player's input/move
 def playerMove():
-    move = input("What's the move?(Hit/Stand) --> ")
+    move = "hit"
     while move == True:
+        move = input("What's the move?(Hit/Stand) --> ")
         if move == "stand":
-            move == False
+            move == "stand"
     
         elif move == "hit":
             player_cards += random.choice(Cards)
