@@ -1,5 +1,4 @@
 import random
-import numpy as np
 
 #list of cards
 Cards = ["A♠", "2♠", "3♠", "4♠", "5♠", "6♠", "7♠", "8♠", "9♠", "10♠", "J♠", "Q♠", "K♠",
@@ -10,17 +9,23 @@ Cards = ["A♠", "2♠", "3♠", "4♠", "5♠", "6♠", "7♠", "8♠", "9♠",
 #User input to start the game
 start_game = input("Start game?[Y/N] -> ")
 
+#creating empty list so it can be accessed anywhere in the code
+player_cards = []
+dealer_cards = []
+dealer_cards1 = []
+#Initializing each value
+playerVal = 0
+dealerVal = 0
+dealerVal1 = 0
+
+
 #game flow 
 def gameMain():
     while start_game == True:
         #Shuffle and dealing of cards
-        player_cards = random.sample(Cards, 2)
-        dealer_cards = random.choice(Cards)
-        dealer_cards1 = random.choice(Cards)
-        #Initializing each value
-        playerVal = 0
-        dealerVal = 0
-        dealerVal1 = 0  
+        player_cards.extend(random.sample(Cards, 2))
+        dealer_cards.append(random.choice(Cards))
+        dealer_cards1.append(random.choice(Cards))
         #Calculating the value of player's hand
         for Card in player_cards:
             player_card_value = Card[0]
@@ -62,11 +67,30 @@ def gameMain():
 
 #performs program based on player's input/move
 def playerMove():
-    move = "hit"
-    while move == True:
-        move = input("What's the move?(Hit/Stand) --> ")
-        if move == "stand":
-            move == "stand"
+    move = True
+
+while move == True:
+    move = input("What's the move?(Hit/Stand) --> ").lower()
+
+    if move == "stand" or playerVal >= 21:
+        break
     
-        elif move == "hit":
-            player_cards += random.choice(Cards)
+    elif move == "hit":
+        player_cards.extend(random.choice(Cards))
+        player_card_value = player_cards[len(player_cards)-1][0]
+        if player_card_value == "1" or player_card_value == "J" or player_card_value == "Q" or player_card_value == "K":
+              playerVal += 10
+        elif player_card_value != "1" and player_card_value != "J" and player_card_value != "Q" and player_card_value != "K" and player_card_value != "A":
+            player_card_value = int(player_card_value)
+            playerVal += player_card_value
+        elif player_card_value == "A":
+            playerVal += 11
+        print(f"card value: {player_card_value}")
+        print(f"value: {playerVal}")
+        print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
+        move = True
+    
+    else:
+        print("Please enter valid keyphrase: hit or stand")            
+            
+            
