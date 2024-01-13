@@ -19,22 +19,17 @@ playerVal = 0
 dealerVal = 0
 dealerVal1 = 0
 
+
 def playerMove():
-    global move 
+    global move
     global playerVal 
     global dealerVal 
     global dealerVal1
-    move = "hit"
-    move = input("What's the move?(Hit/Stand) --> ").lower()
+    
 
-    while move == "hit":
-        if playerVal >= 21:
-             break
-        
-        else:
-            move = input("What's the move?(Hit/Stand) --> ").lower()
-             
-        if move == "stand" or playerVal >= 21:
+    move = input("What's the move?(HIt/Stand) --> ").lower()
+    while playerVal <= 21:
+        if move == "stand":
             break
         
         elif move == "hit":
@@ -42,20 +37,23 @@ def playerMove():
             player_card_value = player_cards[len(player_cards)-1][0]
             if player_card_value == "1" or player_card_value == "J" or player_card_value == "Q" or player_card_value == "K":
                 playerVal += 10
-                print(f"value: {playerVal}")
-                print(f"card value: {player_card_value}")
+                print(player_cards[len(player_cards)-1],f"({player_card_value})")
                 print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
+                move = input("What's the move?(Hit/Stand) --> ").lower()
+                
             elif player_card_value != "1" and player_card_value != "J" and player_card_value != "Q" and player_card_value != "K" and player_card_value != "A":
                 player_card_value = int(player_card_value)
                 playerVal += player_card_value
-                print(f"value: {playerVal}")
-                print(f"card value: {player_card_value}")
+                print(player_cards[len(player_cards)-1],f"({player_card_value})")
                 print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
+                move = input("What's the move?(Hit/Stand) --> ").lower()
+                
             elif player_card_value == "A":
                 playerVal += 11
-                print(f"value: {playerVal}")
-                print(f"card value: {player_card_value}")
+                print(player_cards[len(player_cards)-1],f"({player_card_value})")
                 print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
+                move = input("What's the move?(Hit/Stand) --> ").lower()
+            
             
 
         
