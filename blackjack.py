@@ -10,6 +10,7 @@ Cards = ["A♠", "2♠", "3♠", "4♠", "5♠", "6♠", "7♠", "8♠", "9♠",
 #start_game = input("Start game?[Y/N] -> ")
 
 #creating empty list so it can be accessed anywhere in the code
+
 player_cards = []
 dealer_cards = []
 dealer_cards1 = []
@@ -23,11 +24,16 @@ def playerMove():
     global playerVal 
     global dealerVal 
     global dealerVal1
-    move = True
+    move = "hit"
+    move = input("What's the move?(Hit/Stand) --> ").lower()
 
-    while move == True:
-        move = input("What's the move?(Hit/Stand) --> ").lower()
-    
+    while move == "hit":
+        if playerVal >= 21:
+             break
+        
+        else:
+            move = input("What's the move?(Hit/Stand) --> ").lower()
+             
         if move == "stand" or playerVal >= 21:
             break
         
@@ -35,20 +41,27 @@ def playerMove():
             player_cards.append(random.choice(Cards))
             player_card_value = player_cards[len(player_cards)-1][0]
             if player_card_value == "1" or player_card_value == "J" or player_card_value == "Q" or player_card_value == "K":
-                  playerVal += 10
+                playerVal += 10
+                print(f"value: {playerVal}")
+                print(f"card value: {player_card_value}")
+                print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
             elif player_card_value != "1" and player_card_value != "J" and player_card_value != "Q" and player_card_value != "K" and player_card_value != "A":
                 player_card_value = int(player_card_value)
                 playerVal += player_card_value
+                print(f"value: {playerVal}")
+                print(f"card value: {player_card_value}")
+                print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
             elif player_card_value == "A":
                 playerVal += 11
-            print(f"card value: {player_card_value}")
-            print(f"value: {playerVal}")
-            print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
-            move = True
+                print(f"value: {playerVal}")
+                print(f"card value: {player_card_value}")
+                print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
+            
+
         
         else:
             print("Please enter valid keyphrase: hit or stand")    
-    
+
     return player_cards, playerVal        
 
 #game flow 
@@ -98,6 +111,19 @@ print(f"dealer's hand: {''.join(dealer_cards)} x ({dealerVal})")
 print(f"your hand: {' '.join(player_cards)} ({playerVal})")
 
 playerMove()
+
+
+###if playerVal == 21:
+###     print("You win!")
+###
+###elif playerVal < 21:
+###     print("You Lose!")
+###
+###elif playerVal > Dealer_Value:
+###     print("You Win!")
+###
+###elif playerVal < Dealer_Value:   
+###     print("You lose!")
 
 #performs program based on player's input/move
 
