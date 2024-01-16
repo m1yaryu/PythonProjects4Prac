@@ -19,6 +19,7 @@ playerVal = 0
 dealerVal = 0
 dealerVal1 = 0
 
+move = "hit"
 
 def playerMove():
     global move
@@ -27,33 +28,32 @@ def playerMove():
     global dealerVal1
     
 
-    move = input("What's the move?(HIt/Stand) --> ").lower()
-    while playerVal <= 21:
-        if move == "stand":
-            break
+    while playerVal != 0 and playerVal <= 21:
         
-        elif move == "hit":
+        if move == "hit":
             player_cards.append(random.choice(Cards))
             player_card_value = player_cards[len(player_cards)-1][0]
             if player_card_value == "1" or player_card_value == "J" or player_card_value == "Q" or player_card_value == "K":
                 playerVal += 10
-                print(player_cards[len(player_cards)-1],f"({player_card_value})")
+                print(player_cards[len(player_cards)-1])
                 print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
                 move = input("What's the move?(Hit/Stand) --> ").lower()
                 
             elif player_card_value != "1" and player_card_value != "J" and player_card_value != "Q" and player_card_value != "K" and player_card_value != "A":
                 player_card_value = int(player_card_value)
                 playerVal += player_card_value
-                print(player_cards[len(player_cards)-1],f"({player_card_value})")
+                print(player_cards[len(player_cards)-1])
                 print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
                 move = input("What's the move?(Hit/Stand) --> ").lower()
                 
             elif player_card_value == "A":
                 playerVal += 11
-                print(player_cards[len(player_cards)-1],f"({player_card_value})")
+                print(player_cards[len(player_cards)-1])
                 print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
                 move = input("What's the move?(Hit/Stand) --> ").lower()
             
+        elif move == "stand" or playerVal >= 21:
+            break
             
 
         
