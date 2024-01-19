@@ -60,7 +60,23 @@ def playerMove():
         else:
             print("Please enter valid keyphrase: hit or stand \n")    
 
-    return player_cards, playerVal      
+    return player_cards, playerVal  
+
+def dealerMove():
+    while Dealer_Val < 17:
+        dealer_card1_value = dealer_cards1[len(dealer_cards1)-1][0]
+        dealer_cards1.append(random.choice(Cards))
+        if dealer_card1_value == "1" or dealer_card1_value == "J" or dealer_card1_value == "Q" or dealer_card1_value == "K":
+            Dealer_Val += 10
+                
+        elif dealer_card1_value != "1" and dealer_card1_value != "J" and dealer_card1_value != "Q" and dealer_card1_value != "K" and dealer_card1_value != "A":
+            dealer_card1_value = int(dealer_card1_value)
+            Dealer_Val += dealer_card1_value
+                
+        elif dealer_card1_value == "A":
+            Dealer_Val += 11
+    
+    return Dealer_Val
 
 #game flow 
 ##def gameMain():
