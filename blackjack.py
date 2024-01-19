@@ -28,31 +28,30 @@ def playerMove():
     global dealerVal1
     
 
-    while playerVal != 0 and playerVal <= 21:
+    while playerVal <= 21:
         
+        move = input("What's the move?(Hit/Stand) --> ").lower()   
         if move == "hit":
-            player_cards.append(random.choice(Cards))
             player_card_value = player_cards[len(player_cards)-1][0]
+            player_cards.append(random.choice(Cards))
             if player_card_value == "1" or player_card_value == "J" or player_card_value == "Q" or player_card_value == "K":
                 playerVal += 10
                 print(player_cards[len(player_cards)-1])
                 print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
-                move = input("What's the move?(Hit/Stand) --> ").lower()
                 
             elif player_card_value != "1" and player_card_value != "J" and player_card_value != "Q" and player_card_value != "K" and player_card_value != "A":
                 player_card_value = int(player_card_value)
                 playerVal += player_card_value
                 print(player_cards[len(player_cards)-1])
                 print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
-                move = input("What's the move?(Hit/Stand) --> ").lower()
                 
             elif player_card_value == "A":
-                playerVal += 11
-                print(player_cards[len(player_cards)-1])
-                print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
-                move = input("What's the move?(Hit/Stand) --> ").lower()
+               playerVal += 11
+               print(player_cards[len(player_cards)-1])
+               print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
             
-        elif move == "stand" or playerVal >= 21:
+            
+        elif move == "stand" and playerVal >= 21:
             break
             
 
