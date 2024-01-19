@@ -16,56 +16,57 @@ dealer_cards = []
 dealer_cards1 = []
 #Initializing each value
 playerVal = 0
-dealerVal = 0
-dealerVal1 = 0
+dealerValue = 0
+dealerValue1 = 0
 
 move = "hit"
 
 def playerMove():
     global move
     global playerVal 
-    global dealerVal 
-    global dealerVal1
+    global dealerValue 
+    global dealerValue1
     
 
     while playerVal <= 21:
         
-        move = input("What's the move?(Hit/Stand) --> ").lower()   
+        move = input("What's the move?(Hit/Stand) --> ").lower()  
+
         if move == "hit":
             player_card_value = player_cards[len(player_cards)-1][0]
             player_cards.append(random.choice(Cards))
             if player_card_value == "1" or player_card_value == "J" or player_card_value == "Q" or player_card_value == "K":
                 playerVal += 10
-                print(player_cards[len(player_cards)-1])
-                print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
+                print(player_cards[len(player_cards)-1], "\n")
+                print(f"your hand: {' '.join(player_cards)} ({playerVal}) \n") 
                 
             elif player_card_value != "1" and player_card_value != "J" and player_card_value != "Q" and player_card_value != "K" and player_card_value != "A":
                 player_card_value = int(player_card_value)
                 playerVal += player_card_value
-                print(player_cards[len(player_cards)-1])
-                print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
+                print(player_cards[len(player_cards)-1], "\n")
+                print(f"your hand: {' '.join(player_cards)} ({playerVal}) \n") 
                 
             elif player_card_value == "A":
                playerVal += 11
-               print(player_cards[len(player_cards)-1])
-               print(f"your hand: {' '.join(player_cards)} ({playerVal})") 
+               print(player_cards[len(player_cards)-1], "\n")
+               print(f"your hand: {' '.join(player_cards)} ({playerVal}) \n") 
             
             
-        elif move == "stand" and playerVal >= 21:
+        elif move == "stand" or playerVal >= 21:
             break
             
 
         
         else:
-            print("Please enter valid keyphrase: hit or stand")    
+            print("Please enter valid keyphrase: hit or stand \n")    
 
-    return player_cards, playerVal        
+    return player_cards, playerVal      
 
 #game flow 
 ##def gameMain():
 ##    global playerVal 
-##    global dealerVal 
-##    global dealerVal1
+##    global dealerValue 
+##    global dealerValue1
 ##    while start_game == "Y":
         #Shuffle and dealing of cards
 player_cards.extend(random.sample(Cards, 2))
@@ -85,42 +86,46 @@ for Card in player_cards:
 
 dealer_card_value = dealer_cards[0][0]
 if dealer_card_value == "1" or dealer_card_value == "J" or dealer_card_value == "Q" or dealer_card_value == "K":
-        dealerVal += 10
+        dealerValue += 10
 elif dealer_card_value != "1" and dealer_card_value != "J" and dealer_card_value != "Q" and dealer_card_value != "K" and dealer_card_value != "A":
         dealer_card_value = int(dealer_card_value)
-        dealerVal += dealer_card_value
+        dealerValue += dealer_card_value
 elif dealer_card_value == "A":
-        dealerVal += 11
+        dealerValue += 11
 
 dealer_card1_value = dealer_cards1[0][0]
 if dealer_card1_value == "1" or dealer_card1_value == "J" or dealer_card1_value == "Q" or dealer_card1_value == "K":
-        dealerVal1 += 10
+        dealerValue1 += 10
 elif dealer_card1_value != "1" and dealer_card1_value != "J" and dealer_card1_value != "Q" and dealer_card1_value != "K" and dealer_card1_value != "A":
         dealer_card1_value = int(dealer_card1_value)
-        dealerVal1 += dealer_card1_value
+        dealerValue1 += dealer_card1_value
 elif dealer_card1_value == "A":
-        dealerVal1 += 11
+        dealerValue1 += 11
 
-Dealer_Value = dealerVal + dealerVal1
+Dealer_Val = dealerValue + dealerValue1
 
 #Output each hand and it's value
-print(f"dealer's hand: {''.join(dealer_cards)} x ({dealerVal})")
+print(f"dealer's hand: {''.join(dealer_cards)} x ({dealerValue})")
 print(f"your hand: {' '.join(player_cards)} ({playerVal})")
 
 playerMove()
 
 
-###if playerVal == 21:
-###     print("You win!")
-###
-###elif playerVal < 21:
-###     print("You Lose!")
-###
-###elif playerVal > Dealer_Value:
-###     print("You Win!")
-###
-###elif playerVal < Dealer_Value:   
-###     print("You lose!")
+if playerVal == 21:
+     print(f"Dealer: {' '.join(dealer_cards)} {' '.join(dealer_cards1)}, ({Dealer_Val}) \n")
+     print("Blackjack! You win!")
+
+elif playerVal > 21:
+     print(f"Dealer: {' '.join(dealer_cards)} {' '.join(dealer_cards1)}, ({Dealer_Val}) \n")
+     print("Bust! You lose!")
+
+elif playerVal > Dealer_Val and playerVal < 21:
+     print(f"Dealer: {' '.join(dealer_cards)} {' '.join(dealer_cards1)}, ({Dealer_Val}) \n")
+     print("You Win!")
+
+elif playerVal < Dealer_Val:   
+     print(f"Dealer: {' '.join(dealer_cards)} {' '.join(dealer_cards1)}, ({Dealer_Val}) \n")
+     print("You lose!")
 
 #performs program based on player's input/move
 
