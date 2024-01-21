@@ -9,6 +9,7 @@ with open("card.json", encoding="UTF-8") as f:
 
 # creating empty list so it can be accessed anywhere in the code
 
+shuffle = []
 player_cards = []
 dealer_cards = []
 dealer_cards1 = []
@@ -19,7 +20,7 @@ dealerValue1 = 0
 
 move = "hit"
 
-
+#function for player move
 def playerMove():
     global move
     global playerVal
@@ -67,10 +68,10 @@ def playerMove():
 
     return player_cards, playerVal
 
-
+#deal cards until 17 or higher for dealer
 def dealerMove():
     global Dealer_Val
-    
+
     while Dealer_Val < 17:
         dealer_card1_value = dealer_cards1[len(dealer_cards1) - 1][0]
         dealer_cards1.append(random.choice(Cards))
@@ -104,10 +105,19 @@ def dealerMove():
 ##    global dealerValue
 ##    global dealerValue1
 ##    while start_game == "Y":
+
 # Shuffle and dealing of cards
-player_cards.extend(random.sample(Cards, 2))
-dealer_cards.append(random.choice(Cards))
-dealer_cards1.append(random.choice(Cards))
+shuffle.extend(random.sample(Cards, 4))
+player_cards.extend(random.sample(shuffle, 2))
+dealer_cards.append(random.choice(shuffle))
+dealer_cards1.append(random.choice(shuffle))
+
+#removing shuffled cards to avoid repetition
+for i in range(len(shuffle)):
+    index = Cards.index(shuffle[i])
+    Cards.remove(Cards[index])
+
+
 # Calculating the value of player's hand
 
 for Card in player_cards:
@@ -181,6 +191,7 @@ playerMove()
 
 dealerMove()
 
+#win conditions
 if playerVal == 21:
     print(
         f"Dealer: {' '.join(dealer_cards)} {' '.join(dealer_cards1)}, ({Dealer_Val}) \n"
@@ -204,7 +215,3 @@ elif playerVal < Dealer_Val:
         f"Dealer: {' '.join(dealer_cards)} {' '.join(dealer_cards1)}, ({Dealer_Val}) \n"
     )
     print("You lose!")
-
-# performs program based on player's input/move
-
-##gameMain()
