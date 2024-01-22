@@ -9,7 +9,7 @@ with open("card.json", encoding="UTF-8") as f:
 
 # creating empty list so it can be accessed anywhere in the code
 
-shuffle = []
+shuffle_set = []
 player_cards = []
 dealer_cards = []
 dealer_cards1 = []
@@ -23,6 +23,7 @@ move = "hit"
 #function for player move
 def playerMove():
     global move
+    global index
     global playerVal
     global dealerValue
     global dealerValue1
@@ -33,6 +34,7 @@ def playerMove():
         if move == "hit":
             player_card_value = player_cards[len(player_cards) - 1][0]
             player_cards.append(random.choice(Cards))
+            shuffle(player_cards)
             if (
                 player_card_value == "1"
                 or player_card_value == "J"
@@ -56,9 +58,14 @@ def playerMove():
                 print(f"your hand: {' '.join(player_cards)} ({playerVal}) \n")
 
             elif player_card_value == "A":
-                playerVal += 11
-                print(player_cards[len(player_cards) - 1], "\n")
-                print(f"your hand: {' '.join(player_cards)} ({playerVal}) \n")
+                    if playerVal < 21:
+                        playerVal += 11
+                        print(player_cards[len(player_cards) - 1], "\n")
+                        print(f"your hand: {' '.join(player_cards)} ({playerVal}) \n")
+                    else:
+                        playerVal += 1
+                        print(player_cards[len(player_cards) - 1], "\n")
+                        print(f"your hand: {' '.join(player_cards)} ({playerVal}) \n")
 
         elif move == "stand" or playerVal >= 21:
             break
@@ -75,6 +82,7 @@ def dealerMove():
     while Dealer_Val < 17:
         dealer_card1_value = dealer_cards1[len(dealer_cards1) - 1][0]
         dealer_cards1.append(random.choice(Cards))
+        shuffle(dealer_cards1)
         if (
             dealer_card1_value == "1"
             or dealer_card1_value == "J"
@@ -98,6 +106,14 @@ def dealerMove():
 
     return Dealer_Val
 
+#picking random cards from the deck  
+#and removing them to avoid repetition
+def shuffle(set):
+    for i in range(len(set)):
+        if set[i] in Cards:
+            index = Cards.index(set[i])
+            Cards.remove(Cards[index])
+    return Cards
 
 # game flow
 ##def gameMain():
@@ -107,15 +123,11 @@ def dealerMove():
 ##    while start_game == "Y":
 
 # Shuffle and dealing of cards
-shuffle.extend(random.sample(Cards, 4))
-player_cards.extend(random.sample(shuffle, 2))
-dealer_cards.append(random.choice(shuffle))
-dealer_cards1.append(random.choice(shuffle))
-
-#removing shuffled cards to avoid repetition
-for i in range(len(shuffle)):
-    index = Cards.index(shuffle[i])
-    Cards.remove(Cards[index])
+shuffle_set.extend(random.sample(Cards, 4))
+player_cards.extend(random.sample(shuffle_set, 2))
+dealer_cards.append(random.choice(shuffle_set))
+dealer_cards1.append(random.choice(shuffle_set))
+shuffle(shuffle_set)
 
 
 # Calculating the value of player's hand
