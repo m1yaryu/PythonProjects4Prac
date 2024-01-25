@@ -21,7 +21,8 @@ dealerValue1 = 0
 
 move = "hit"
 
-#function for player move
+
+# function for player move
 def playerMove():
     global move
     global index
@@ -62,7 +63,7 @@ def playerMove():
                 playerVal += 11
                 print(player_cards[len(player_cards) - 1], "\n")
                 print(f"your hand: {' '.join(player_cards)} ({playerVal}) \n")
-        
+
         elif any(Card in player_cards for Card in Aces) and playerVal < 21:
             playerVal -= 11
             playerVal += 1
@@ -75,7 +76,8 @@ def playerMove():
 
     return player_cards, playerVal
 
-#deal cards until 17 or higher for dealer
+
+# deal cards until 17 or higher for dealer
 def dealerMove():
     global Dealer_Val
 
@@ -103,21 +105,23 @@ def dealerMove():
 
         elif dealer_card1_value == "A":
             Dealer_Val += 11
-        
+
         elif any(Card in Aces for Card in dealer_cards1) and DealerVal > 21:
             DealerVal -= 11
             DealerVal += 1
 
     return Dealer_Val
 
-#picking random cards from the deck  
-#and removing them to avoid repetition
+
+# picking random cards from the deck
+# and removing them to avoid repetition
 def shuffle(set):
     for i in range(len(set)):
         if set[i] in Cards:
             index = Cards.index(set[i])
             Cards.remove(Cards[index])
     return Cards
+
 
 # game flow
 ##def gameMain():
@@ -207,7 +211,7 @@ playerMove()
 
 dealerMove()
 
-#win conditions
+# win conditions
 if playerVal == 21:
     print(
         f"Dealer: {' '.join(dealer_cards)} {' '.join(dealer_cards1)}, ({Dealer_Val}) \n"
@@ -226,9 +230,8 @@ elif playerVal > Dealer_Val and playerVal < 21:
     )
     print("You Win!")
 
-elif playerVal < Dealer_Val: 
+elif playerVal < Dealer_Val:
     print(
         f"Dealer: {' '.join(dealer_cards)} {' '.join(dealer_cards1)}, ({Dealer_Val}) \n"
     )
     print("You lose!")
-
