@@ -13,6 +13,7 @@ shuffle_set = []
 player_cards = []
 dealer_cards = []
 dealer_cards1 = []
+Aces = ["A♠", "A♥", "A♣", "A♦"]
 # Initializing each value
 playerVal = 0
 dealerValue = 0
@@ -28,7 +29,7 @@ def playerMove():
     global dealerValue
     global dealerValue1
 
-    while playerVal <= 21:
+    while move == "hit":
         move = input("What's the move?(Hit/Stand) --> ").lower()
 
         if move == "hit":
@@ -58,16 +59,15 @@ def playerMove():
                 print(f"your hand: {' '.join(player_cards)} ({playerVal}) \n")
 
             elif player_card_value == "A":
-                    if playerVal < 21:
-                        playerVal += 11
-                        print(player_cards[len(player_cards) - 1], "\n")
-                        print(f"your hand: {' '.join(player_cards)} ({playerVal}) \n")
-                    else:
-                        playerVal += 1
-                        print(player_cards[len(player_cards) - 1], "\n")
-                        print(f"your hand: {' '.join(player_cards)} ({playerVal}) \n")
+                playerVal += 11
+                print(player_cards[len(player_cards) - 1], "\n")
+                print(f"your hand: {' '.join(player_cards)} ({playerVal}) \n")
+        
+        elif any(Card in player_cards for Card in Aces) and playerVal < 21:
+            playerVal -= 11
+            playerVal += 1
 
-        elif move == "stand" or playerVal >= 21:
+        elif playerVal >= 21:
             break
 
         else:
@@ -103,6 +103,10 @@ def dealerMove():
 
         elif dealer_card1_value == "A":
             Dealer_Val += 11
+        
+        elif any(Card in Aces for Card in dealer_cards1) and DealerVal > 21:
+            DealerVal -= 11
+            DealerVal += 1
 
     return Dealer_Val
 
@@ -227,3 +231,4 @@ elif playerVal < Dealer_Val:
         f"Dealer: {' '.join(dealer_cards)} {' '.join(dealer_cards1)}, ({Dealer_Val}) \n"
     )
     print("You lose!")
+
